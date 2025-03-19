@@ -351,29 +351,37 @@
 
     function startAnimation() {
         const container = document.querySelector('.container');
+        const envelope = document.querySelector('.envelope');
+        const front = document.querySelector('.front');
         
-        // Start the transition immediately
-        container.classList.add('fade-out');
-        
-        // Create hearts effect
-        const heartsContainer = document.createElement('div');
-        heartsContainer.className = 'hearts-transition';
-        document.body.appendChild(heartsContainer);
-        
-        // Add hearts
-        for (let i = 0; i < 100; i++) {
-            setTimeout(() => {
-                const heart = createHeart();
-                heart.style.transform = `translateZ(${i * 10}px)`;
-                heart.style.fontSize = `${36 + i/2}px`;
-                heartsContainer.appendChild(heart);
-            }, i * 50);
-        }
-
-        // Change page after 3 seconds
+        // Start the transition after 4 seconds
         setTimeout(() => {
-            window.location.href = 'templates/main.html';
-        }, 3000);
+            container.classList.add('fade-out');
+            
+            // Create hearts effect
+            const heartsContainer = document.createElement('div');
+            heartsContainer.className = 'hearts-transition';
+            document.body.appendChild(heartsContainer);
+            
+            // Add hearts
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const heart = createHeart();
+                    heart.style.transform = `translateZ(${i * 10}px)`;
+                    heart.style.fontSize = `${36 + i/2}px`;
+                    heartsContainer.appendChild(heart);
+                }, i * 50);
+            }
+
+            // Open the envelope
+            envelope.classList.add('open');
+            front.classList.add('open');
+
+            // Change page after 3 seconds
+            setTimeout(() => {
+                window.location.href = 'templates/main.html';
+            }, 3000);
+        }, 4000); // Wait 4 seconds before starting
     }
 
     // Add background floating hearts
