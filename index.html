@@ -88,6 +88,9 @@
                 0 0 20px rgba(255, 51, 102, 0.3),
                 0 0 40px rgba(255, 51, 102, 0.2);
             animation: pulseEnvelope 2s infinite ease-in-out;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
         }
 
         .envelope::before {
@@ -347,6 +350,10 @@
     }
 
     function handleClick(event) {
+        console.log('Click detected!'); // Debug log
+        event.preventDefault(); // Prevent any default behavior
+        event.stopPropagation(); // Stop event from bubbling up
+        
         const container = document.querySelector('.container');
         
         // Show the message for 5 seconds
