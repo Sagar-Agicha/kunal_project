@@ -194,7 +194,7 @@
             animation: pulseText 2s infinite;
             padding: 15px;
             position: relative;
-            z-index: 1;
+            z-index: 7;
         }
 
         /* Add decorative border around text */
@@ -261,6 +261,9 @@
         .card {
             background: linear-gradient(135deg, #fff, #fff8f8);
             box-shadow: 0 0 20px rgba(255, 51, 102, 0.2);
+            transform-origin: top;
+            transition: transform 1s ease-in-out;
+            z-index: 6;
         }
 
         .card::before {
@@ -305,16 +308,19 @@
         .envelope.open {
             transform: translateY(-50px);
             transition: transform 1s ease-in-out;
+            z-index: 5;
         }
 
         .front.open {
             transform: rotateX(180deg);
             transition: transform 1s ease-in-out;
+            z-index: 4;
         }
 
         .card {
             transform-origin: top;
             transition: transform 1s ease-in-out;
+            z-index: 6;
         }
 
         .envelope.open .card {
@@ -354,7 +360,7 @@
         const envelope = document.querySelector('.envelope');
         const front = document.querySelector('.front');
         
-        // Start the transition after 4 seconds
+        // Start the transition after 2 seconds
         setTimeout(() => {
             container.classList.add('fade-out');
             
@@ -381,7 +387,7 @@
             setTimeout(() => {
                 window.location.href = 'templates/main.html';
             }, 3000);
-        }, 4000); // Wait 4 seconds before starting
+        }, 2000); // Wait 2 seconds before starting
     }
 
     // Add background floating hearts
