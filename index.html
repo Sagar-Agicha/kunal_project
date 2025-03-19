@@ -325,10 +325,10 @@
 <body>
 
 <div class="background-hearts"></div>
-<div class="hint-message">Click the envelope to read my message... 💝</div>
+<div class="hint-message">Your message is about to appear... 💝</div>
 <div class="container">
     <div class="valentines">
-        <div class="envelope" onclick="handleClick(event)">
+        <div class="envelope">
             <div class="card">
                 <div class="text">
                     I'm<br> So<br> Sorry
@@ -349,45 +349,38 @@
         return heart;
     }
 
-    function handleClick(event) {
-        console.log('Click detected!'); // Debug log
-        event.preventDefault(); // Prevent any default behavior
-        event.stopPropagation(); // Stop event from bubbling up
-        
+    function startAnimation() {
         const container = document.querySelector('.container');
         
-        // Show the message for 5 seconds
-        setTimeout(() => {
-            // Start the transition
-            container.classList.add('fade-out');
-            
-            // Create hearts effect
-            const heartsContainer = document.createElement('div');
-            heartsContainer.className = 'hearts-transition';
-            document.body.appendChild(heartsContainer);
-            
-            // Add hearts
-            for (let i = 0; i < 100; i++) {
-                setTimeout(() => {
-                    const heart = createHeart();
-                    heart.style.transform = `translateZ(${i * 10}px)`;
-                    heart.style.fontSize = `${36 + i/2}px`;
-                    heartsContainer.appendChild(heart);
-                }, i * 50);
-            }
-
-            // Change page after animation
+        // Start the transition immediately
+        container.classList.add('fade-out');
+        
+        // Create hearts effect
+        const heartsContainer = document.createElement('div');
+        heartsContainer.className = 'hearts-transition';
+        document.body.appendChild(heartsContainer);
+        
+        // Add hearts
+        for (let i = 0; i < 100; i++) {
             setTimeout(() => {
-                window.location.href = 'templates/main.html';
-            }, 3000);
-        }, 5000);
+                const heart = createHeart();
+                heart.style.transform = `translateZ(${i * 10}px)`;
+                heart.style.fontSize = `${36 + i/2}px`;
+                heartsContainer.appendChild(heart);
+            }, i * 50);
+        }
+
+        // Change page after 3 seconds
+        setTimeout(() => {
+            window.location.href = 'templates/main.html';
+        }, 3000);
     }
 
     // Add background floating hearts
     function createBackgroundHearts() {
         const container = document.querySelector('.background-hearts');
         const heartSymbols = ['♥', '♡', '💖', '💕', '💞', '💟', '💝'];
-        const numberOfHearts = 60;  // Increased from 15 to 30
+        const numberOfHearts = 60;
 
         for(let i = 0; i < numberOfHearts; i++) {
             const heart = document.createElement('div');
@@ -424,6 +417,9 @@
     window.addEventListener('load', () => {
         createBackgroundHearts();
         createSparkles();
+        
+        // Start the animation sequence after 3 seconds
+        setTimeout(startAnimation, 3000);
     });
 </script>
 </body>
